@@ -1,3 +1,6 @@
+-- SP to append weekly data usage to `cto-wln-sa-data-pr-bb5283.customer_personas_features.imsi_app_usage_trends_weekly_ts`
+
+CREATE OR REPLACE PROCEDURE `cto-wln-sa-data-pr-bb5283.customer_personas_features.imsi_app_usage_trends_weekly_ts_append`()
 BEGIN 
 
 -- Get past week's data usage aggregated 
