@@ -1,0 +1,55 @@
+WITH DUP_table AS (
+	select
+		campaign_number,
+		list_number,
+		campaign_description,
+		campaign_in_home_date,
+		PRODUCT_TYPE,
+		media_type,
+		control_group,
+		ban,
+		subscriber_no AS MSISDN,
+		delivered,
+		opened,
+		clickthrough,
+		UNSUBSCRIBE,
+		opt_out as sms_opt_out,
+		rpc_ind as dup_sale,
+		PRE_MSF,
+		PRE_MRC,
+		POST_MSF,
+		POST_MRC,
+		POST_RATE_PLAN,
+		POST_SOC_DESCRIPTION,
+		MSF_DELTA,
+		MRC_DELTA,
+		MRC_FLAG,
+		MSF_FLAG
+	
+	from EPDMADM.dup_multi_new
+	where campaign='DUP 5G Campaigns'
+) 
+
+
+SELECT 
+*
+FROM DUP_table
+
+
+--SELECT 
+--	CAMPAIGN_DESCRIPTION,
+--	CONTROL_GROUP, 
+--	COUNT(*) AS NUM_TARGETED,
+--	SUM(DUP_SALE) AS NUM_SALES,
+--	SUM(DUP_SALE)/COUNT(*) AS SALES_RATE
+--FROM DUP_table
+--GROUP BY CAMPAIGN_DESCRIPTION , CONTROL_GROUP 
+--ORDER BY CAMPAIGN_DESCRIPTION
+
+
+
+--SELECT 
+--	campaign,
+--	count(*)
+--FROM EPDMADM.DUP_MULTI_NEW 
+--GROUP BY campaign 

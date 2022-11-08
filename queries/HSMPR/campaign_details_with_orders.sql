@@ -63,5 +63,6 @@ INNER JOIN order_dtl order_dtl
 ON -- I think we need MORE JOIN conditions OR Filters?
 	em_dtl.CUST_ID = order_dtl.CUST_ID -- JOIN ON customer ID 
 	AND order_dtl.INITIAL_CREATED_DT BETWEEN em_dtl.CAMP_INHOME AND em_dtl.CAMP_INHOME + 31 
-	AND CAMP_ID='LWC' 
+WHERE
+	CAMP_ID='LWC' 
 	AND CAMP_INHOME > TO_DATE('2022-07-01', 'YYYY-MM-DD')
