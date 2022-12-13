@@ -1,0 +1,72 @@
+SELECT 	
+	em.TRACKING 
+	em.CAMP_INHOME,
+	em.CAMP_ID,
+	em.DBM_VERSION,
+	em.CAMP_CREATIVE,
+	em.CAMP_CREATIVE_DESC,
+	em.CAMP_TEST,
+	em.CAMP_CONTACT,
+	em.CAMP_FILE,
+	em.EPP_IND,
+	em.AGE_BAND,
+	em.MEASURE_BASE,
+	em.CUST_ID,
+	em.BACCT_NUM AS BAN,
+	em.TELENO AS MSISDN,
+	em.DELIVERED, 
+	em.OPENED, -- Do we know what time they opened?
+	em.CLICKTHROUGH,
+	em.SOFTBOUNCE,
+	em.HARDBOUNCE,
+	em.UNSUBSCRIBE,
+	em.DEVICE,
+	em.OPERATINGSYSTEM 
+FROM HSM_CM_AD.CAMP_ENGAGE_EM_DTL em
+WHERE 
+	CAMP_ID='LWC' AND 
+	CAMP_INHOME > TO_DATE('2022-01-01', 'YYYY-MM-DD')
+ 
+
+ SELECT 	
+	em.TRACKING,
+	em.CAMP_INHOME,
+	em.CAMP_ID,
+	em.DBM_VERSION,
+	em.CAMP_CREATIVE,
+	em.CAMP_CREATIVE_DESC,
+	em.CAMP_TEST,
+	em.CAMP_CONTACT,
+	em.CAMP_FILE,
+	em.EPP_IND,
+	em.AGE_BAND,
+	em.MEASURE_BASE,
+	em.CUST_ID,
+	em.BACCT_NUM AS BAN,
+	em.TELENO AS MSISDN,
+	em.DELIVERED, 
+	em.OPENED, -- Do we know what time they opened?
+	em.CLICKTHROUGH,
+	em.SOFTBOUNCE,
+	em.HARDBOUNCE,
+	em.UNSUBSCRIBE,
+	em.DEVICE,
+	em.OPERATINGSYSTEM 
+FROM HSM_CM_AD.CAMP_ENGAGE_EM_DTL em
+WHERE 
+	em.CAMP_TEST='C' AND 
+	em.DELIVERED != 0
+	
+	
+SELECT 
+	em.CUST_ID,
+	SUM(em.DELIVERED) AS num_delivered_campaigns,
+	SUM(em.OPENED) AS num_opened_campaigns,
+	SUM(CLICKTHROUGH) AS num_clickthrough_campaigns,
+	SUM(SOFTBOUNCE) AS num_softbounce_campaigns,
+	SUM(HARDBOUNCE) AS num_hardbounce_campaigns,
+	SUM(UNSUBSCRIBE) AS num_unsubscribe_campaigns
+FROM HSM_CM_AD.CAMP_ENGAGE_EM_DTL em
+WHERE em.CAMP_INHOME > TO_DATE('2022-06-01', 'YYYY-MM-DD')
+GROUP BY em.CUST_ID 
+ORDER BY SUM(UNSUBSCRIBE) DESC 

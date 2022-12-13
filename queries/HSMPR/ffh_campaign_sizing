@@ -1,0 +1,16 @@
+SELECT 	
+	em.CAMP_ID,
+	em.CAMP_CREATIVE,
+	em.CAMP_CREATIVE_DESC,
+	em.CAMP_INHOME,
+	em.CAMP_TEST,
+
+	SUM(em.DELIVERED) AS num_delivered_msgs,
+	SUM(em.OPENED) AS num_opened_msgs,
+	SUM(em.CLICKTHROUGH) AS num_clickthrough_msgs,
+	SUM(em.SOFTBOUNCE) AS num_softbounce,
+	SUM(em.HARDBOUNCE) AS num_hardbounce,
+	SUM(em.UNSUBSCRIBE) AS num_unsubscribe,
+	COUNT(*) AS num_customers_targeted
+FROM HSM_CM_AD.CAMP_ENGAGE_EM_DTL em
+GROUP BY em.CAMP_ID, em.CAMP_CREATIVE, em.CAMP_CREATIVE_DESC,	em.CAMP_INHOME,	em.CAMP_TEST

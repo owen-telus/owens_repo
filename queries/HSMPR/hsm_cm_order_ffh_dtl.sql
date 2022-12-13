@@ -1,0 +1,19 @@
+SELECT 
+	ffh_ord.CUST_ID,
+	ffh_ord.BILL_ACCOUNT_NUMBER AS BAN,
+	ffh_ord.PROD_INSTNC_ID,
+	ffh_ord.CHANNEL_GROUP,
+	ffh_ord.CHANNEL,
+	ffh_ord.PRODUCT, 
+	ffh_ord.PRODUCT_FAMILY,
+	ffh_ord.TECH_TYPE,
+	ffh_ord.PLATFORM,
+	ffh_ord.ORDER_STATUS,
+	ffh_ord.YIELD_STATUS,
+	ffh_ord.YIELD_SUB_STATUS,
+	ffh_ord.SALES_ACTIVITY_TYPE,
+	ffh_ord.SALES_ACTIVITY,
+	ffh_ord.PRODUCT_NAME ,
+	ffh_ord.CURRENT_ORDER_STATUS 
+FROM HSM_CM.ORDER_FFH_DTL ffh_ord 
+WHERE BILL_ACCOUNT_NUMBER  = '604169589'

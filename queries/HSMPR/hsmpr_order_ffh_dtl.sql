@@ -1,0 +1,11 @@
+-- This table shows the orders at the FFH level
+
+SELECT 
+  CUST_ID,
+  BILL_ACCOUNT_NUMBER,
+  FMS_ADDRESS_ID
+FROM HSM_CM.ORDER_FFH_DTL
+WHERE 
+CREATED_DT >= TO_DATE('05/01/2022','MM/DD/YYYY') 
+AND PRODUCT = 'LWC'
+AND rownum < 10;

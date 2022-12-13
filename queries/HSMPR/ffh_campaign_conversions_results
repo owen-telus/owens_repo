@@ -1,0 +1,38 @@
+-- Get conversion results by product for FFH
+WITH conversion_stats AS (
+	SELECT 
+		CAMP_ID,
+		CAMP_CREATIVE,
+		CAMP_INHOME,
+		PRODUCT,
+		CAMP_TEST,
+		SUM(DELIVERED) AS num_delivered_msgs,
+		SUM(OPENED) AS num_opened_msgs,
+		SUM(CLICKTHROUGH) AS num_clickthrough_msgs,
+		COUNT(*) AS num_conversions
+	FROM HSM_CM_AD.CAMP_ORDER_LFT_DTL
+	--WHERE CAMP_CREATIVE='LWC0222FFHC'
+	GROUP BY CAMP_ID,CAMP_CREATIVE,	CAMP_INHOME,PRODUCT,CAMP_TEST
+)
+
+SELECT 
+	* 
+FROM conversion_stats 
+PIVOT(
+	MAX(num_delivered_msgs) AS num_delivered_msgs,
+	MAX(num_opened_msgs) AS num_opened_msgs,
+	MAX(num_clickthrough_msgs) AS num_clickthrough_msgs,
+	MAX(num_conversions) AS num_conversions
+	
+	FOR PRODUCT IN ('SMHM' SMHM,
+					'SING' SING,
+					'TTV' TTV,
+					'LWC' LWC,
+					'TOS' TOS,
+					'PIK' PIK,
+					'HSIC' HSIC,
+					'WHSIA' WHSIA,
+					'SWS' SWS,
+					'WIFI' WIFI)
+)
+--SELECT DISTINCT PRODUCT FROM HSM_CM_AD.CAMP_ORDER_LFT_DTL
